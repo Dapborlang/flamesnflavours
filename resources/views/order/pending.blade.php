@@ -1,6 +1,6 @@
 <!-- resources/views/orders.blade.php -->
 
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
     <!-- Other content... -->

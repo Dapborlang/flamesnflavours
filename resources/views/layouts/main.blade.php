@@ -62,7 +62,7 @@
     <nav>
         <a href="#">Home</a>
         <a href="/order/create">Menu</a>
-        <a href="#">Orders</a>
+        <a href="/orders/detail">Orders</a>
         <a href="#">Contact</a>
     </nav>
 

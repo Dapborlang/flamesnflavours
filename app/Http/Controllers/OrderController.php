@@ -72,46 +72,36 @@ class OrderController extends Controller
 
     public function getOrdersByStatus(Request $request)
     {
-        // Validate the request
         $request->validate([
             'status' => 'required|in:Pending,Processing,Completed',
         ]);
 
         $status = $request->input('status');
-
-        // Fetch orders based on the specified status
         $orders = Order::where('status', $status)->get();
-
         return response()->json($orders);
     }
 
     public function processOrder($orderId)
     {
-        // Find the order by ID
         $order = Order::findOrFail($orderId);
-
-        // Update the order status to "processed" (you can customize the status values as needed)
         $order->update(['status' => 'processing']);
-
-        // You can add more logic here, such as notifying the user or updating inventory
-
         return response()->json(['message' => 'Order processed successfully']);
     }
 
     public function completeOrder($id)
     {
-        // Find the order by ID
         $order = Order::find($id);
-
         if (!$order) {
-            // Order not found
             return response()->json(['error' => 'Order not found'], 404);
         }
-
-        // Update the order status to "Completed"
         $order->status = 'Completed';
         $order->save();
-
         return response()->json(['message' => 'Order completed successfully']);
+    }
+
+    public function getOrdersDetail(Order $order)
+    {
+        $order->load('items.menuItem'); 
+        return $order;
     }
 }

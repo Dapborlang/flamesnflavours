@@ -27,7 +27,7 @@
 <script>
 export default {
     props: {
-        order: Object, // The order data passed as a prop
+        order: Object, 
     },
     methods: {
         calculateTotalCost() {
