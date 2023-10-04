@@ -33,6 +33,9 @@ app.component('menulist-component', MenuListComponent);
 import OrderSummary from './components/OrderSummary.vue';
 app.component('order-summary', OrderSummary);
 
+import PendingOrders from './components/PendingOrders.vue';
+app.component('pending-orders', PendingOrders);
+
 
 
 /**

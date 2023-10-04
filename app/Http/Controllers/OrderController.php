@@ -64,4 +64,28 @@ class OrderController extends Controller
         $order->load('items.menuItem'); 
         return view('order.summary', compact('order'));
     }
+
+    public function showPendingOrders()
+    {
+        return view('order.pending');
+    }
+
+    public function getPendingOrders()
+    {
+        $pendingOrders = Order::whereIn('status', ['pending','processing'])->get();
+        return response()->json($pendingOrders);
+    }
+
+    public function processOrder($orderId)
+{
+    // Find the order by ID
+    $order = Order::findOrFail($orderId);
+
+    // Update the order status to "processed" (you can customize the status values as needed)
+    $order->update(['status' => 'processing']);
+
+    // You can add more logic here, such as notifying the user or updating inventory
+
+    return response()->json(['message' => 'Order processed successfully']);
+}
 }
