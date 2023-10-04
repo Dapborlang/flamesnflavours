@@ -51,30 +51,39 @@
             text-align: center;
             padding: 1em;
         }
+
+        .printable {
+            display: block; 
+        }
+        @media print {
+            .non-printable {
+            display: none;
+            }
+            .printable {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
-<div id="app">
-    <header>
-        <h1>Flames & Flavours</h1>
-    </header>
+    <div id="app">
+        <header class="non-printable">
+            <h1>Flames & Flavours</h1>
+        </header>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="/order/create">Menu</a>
-        <a href="/orders/detail">Orders</a>
-        <a href="#">Contact</a>
-    </nav>
+        <nav class="non-printable">
+            <a href="#">Home</a>
+            <a href="/order/create">Menu</a>
+            <a href="/orders/detail">Orders</a>
+            <a href="#">Contact</a>
+        </nav>
 
-    <section>
-        @yield('content')
-    </section>
-
-    
-
-    <footer>
-        <p>&copy; 2023 Flames & Flavours. All rights reserved.</p>
-    </footer>
-</div
+        <section>
+            @yield('content')
+        </section>
+        <footer class="non-printable">
+            <p>&copy; 2023 Flames & Flavours. All rights reserved.</p>
+        </footer>
+    </div
 </body>
 </html>

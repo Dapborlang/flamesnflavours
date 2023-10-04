@@ -38,3 +38,4 @@ Route::get('/orders/{order}', [OrderController::class, 'getOrdersDetail']);
 Route::post('/orders', [OrderController::class, 'getOrdersByStatus']);
 Route::post('/orders/process/{orderId}', [OrderController::class, 'processOrder']);
 Route::post('/orders/complete/{id}', [OrderController::class, 'completeOrder']);
+Route::get('/print/{id}', [OrderController::class, 'printReceipt']);

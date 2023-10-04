@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
-    {
-        
-    }
-
     public function create()
     {
         return view('order.create');
@@ -36,27 +31,6 @@ class OrderController extends Controller
         }
     
         return response()->json(['message' => 'Order placed successfully', 'order' => $order]);
-    }
-
-
-    public function show(Order $order)
-    {
-
-    }
-
-    public function edit(Order $order)
-    {
-      
-    }
-
-    public function update(Request $request, Order $order)
-    {
-        
-    }
-
-    public function destroy(Order $order)
-    {
-        
     }
 
     public function showOrderSummary(Order $order)
@@ -103,5 +77,11 @@ class OrderController extends Controller
     {
         $order->load('items.menuItem'); 
         return $order;
+    }
+
+    public function printReceipt(Order $order)
+    {
+        $order->load('items.menuItem'); 
+        return view('order.print', compact('order'));
     }
 }

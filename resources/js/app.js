@@ -36,6 +36,8 @@ app.component('order-summary', OrderSummary);
 import PendingOrders from './components/PendingOrders.vue';
 app.component('pending-orders', PendingOrders);
 
+import GstComponent from './components/GstComponent.vue';
+app.component('gst-component', GstComponent);
 
 
 /**

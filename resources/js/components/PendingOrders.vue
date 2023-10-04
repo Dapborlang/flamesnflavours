@@ -50,6 +50,7 @@
             <button @click="handleButtonClick(order.id)" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#order_summary_id">
               {{ order.id }} - {{ capitalizeFirstLetter(order.status) }}
             </button>
+            <button @click="printReceipt(order.id)" class="action-btn">Print</button>
           </li>
         </ul>
       </div>
@@ -175,6 +176,11 @@ export default {
         });
     },
 
+    printReceipt(orderId)
+    {
+      const url = `/print/${orderId}`;
+      window.open(url, '_blank');
+    }
 
   },
 };
