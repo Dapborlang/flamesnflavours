@@ -34,5 +34,6 @@ use App\Http\Controllers\OrderController;
 Route::resource('order',OrderController::class);
 Route::get('/order/{order}', [OrderController::class, 'showOrderSummary'])->name('order.summary');
 Route::get('/orders/pending', [OrderController::class, 'showPendingOrders']);
-Route::post('/orders/pending', [OrderController::class, 'getPendingOrders']);
+Route::post('/orders', [OrderController::class, 'getOrdersByStatus']);
 Route::post('/orders/process/{orderId}', [OrderController::class, 'processOrder']);
+Route::post('/orders/complete/{id}', [OrderController::class, 'completeOrder']);
