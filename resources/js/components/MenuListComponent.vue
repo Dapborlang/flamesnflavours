@@ -143,6 +143,7 @@
         items: this.cart.map(item => ({
           id: item.id,
           quantity: item.quantity,
+          rate: item.price,
         })),
       };
 

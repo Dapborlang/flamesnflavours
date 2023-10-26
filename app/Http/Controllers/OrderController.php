@@ -27,6 +27,7 @@ class OrderController extends Controller
             $orderItem->order_id= $order->id;
             $orderItem->menu_item_id= $item['id'];
             $orderItem->quantity = $item['quantity'];
+            $orderItem->amount=$item['rate'];
             $orderItem->save();
         }
     

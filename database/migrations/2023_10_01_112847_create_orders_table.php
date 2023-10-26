@@ -25,11 +25,10 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('menu_item_id');
             $table->integer('quantity');
-            // Add other fields as needed
-            $table->timestamps();
-    
+            $table->decimal('amount', 10, 2);
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('menu_item_id')->references('id')->on('menu_items');
+            $table->timestamps();            
         });
     }
 

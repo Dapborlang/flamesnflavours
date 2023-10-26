@@ -6,6 +6,7 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -39,6 +40,8 @@ app.component('pending-orders', PendingOrders);
 import GstComponent from './components/GstComponent.vue';
 app.component('gst-component', GstComponent);
 
+import DashboardComponent from './components/DashboardComponent.vue';
+app.component('dash-component', DashboardComponent);
 
 /**
  * The following block of code may be used to automatically register your

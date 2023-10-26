@@ -39,3 +39,6 @@ Route::post('/orders', [OrderController::class, 'getOrdersByStatus']);
 Route::post('/orders/process/{orderId}', [OrderController::class, 'processOrder']);
 Route::post('/orders/complete/{id}', [OrderController::class, 'completeOrder']);
 Route::get('/print/{id}', [OrderController::class, 'printReceipt']);
+
+use App\Http\Controllers\DashBoardController;
+Route::get('/dashboard', [DashBoardController::class, 'index']);
