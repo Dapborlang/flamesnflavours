@@ -8,7 +8,7 @@
             </a>
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                 <li class="nav-item">
-                <a href="#" class="nav-link align-middle px-0">
+                <a href="#" class="nav-link align-middle px-0"  @click="toggleSection('home')">
                     <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
                 </li>    
@@ -40,6 +40,7 @@
           </div>
         </div>
         <div class="col py-3 scrollable-container">
+          <home-component v-if="activeSection === 'home'"></home-component>
           <order-component v-if="activeSection === 'orders'"></order-component>
           <menu-management-component v-if="activeSection === 'menuManagement'"></menu-management-component>
         </div>
@@ -48,13 +49,14 @@
   </template>
   
 <script>
-  import OrderComponent from './PendingOrders.vue';
+  import HomeComponent from './DailySaleComponent.vue';
+  import OrderComponent from './DailySaleComponent.vue';
   import MenuManagementComponent  from './MenuManagement.vue'; 
 
   export default {
     data() {
       return {
-        activeSection: '', 
+        activeSection: 'home', 
       };
     },
     methods: {
@@ -63,6 +65,7 @@
       },
     },
     components: {
+      HomeComponent,
       OrderComponent,
       MenuManagementComponent,
     },
