@@ -20,6 +20,14 @@
                     <a href="#" class="nav-link px-0 align-middle" @click="toggleSection('menuManagement')">
                     <i class="bi bi-menu-app"></i><span class="ms-1 d-none d-sm-inline">Menu Management</span></a>
                 </li>       
+                <li>
+                    <a href="#" class="nav-link px-0 align-middle" @click="toggleSection('role')">
+                    <i class="bi bi-menu-app"></i><span class="ms-1 d-none d-sm-inline">Role</span></a>
+                </li> 
+                <li>
+                    <a href="#" class="nav-link px-0 align-middle" @click="toggleSection('userRole')">
+                    <i class="bi bi-menu-app"></i><span class="ms-1 d-none d-sm-inline">User Management</span></a>
+                </li>
             </ul>
             <hr>
             <div class="dropdown pb-4">
@@ -43,6 +51,8 @@
           <home-component v-if="activeSection === 'home'"></home-component>
           <order-component v-if="activeSection === 'orders'"></order-component>
           <menu-management-component v-if="activeSection === 'menuManagement'"></menu-management-component>
+          <role-component v-if="activeSection === 'role'"></role-component>
+          <user-role-component v-if="activeSection === 'userRole'"></user-role-component>
         </div>
       </div>
     </div>
@@ -52,6 +62,8 @@
   import HomeComponent from './DailySaleComponent.vue';
   import OrderComponent from './DailySaleComponent.vue';
   import MenuManagementComponent  from './MenuManagement.vue'; 
+  import RoleComponent  from './RoleComponent.vue'; 
+  import UserRoleComponent  from './UserRoleComponent.vue'; 
 
   export default {
     data() {
@@ -68,6 +80,8 @@
       HomeComponent,
       OrderComponent,
       MenuManagementComponent,
+      RoleComponent,
+      UserRoleComponent,
     },
   };
 </script>

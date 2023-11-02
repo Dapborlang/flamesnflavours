@@ -26,7 +26,4 @@ class DashBoardController extends Controller
 
         return response()->json($dailySales);
     }
-
-
-
 }

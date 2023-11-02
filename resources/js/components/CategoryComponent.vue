@@ -78,7 +78,6 @@
       },
   
       updateCategory() {
-        // Use Axios to send a PUT request to update the editing category in Laravel backend
         axios.put(`/categories/${this.editingCategory.id}`, {
           name: this.categoryName,
         })

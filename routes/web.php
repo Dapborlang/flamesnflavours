@@ -21,6 +21,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+use App\Http\Controllers\UserController;
+Route::resource('users', UserController::class);
+
+use App\Http\Controllers\RoleController;
+Route::resource('roles', RoleController::class);
+
+use App\Http\Controllers\UserRoleController;
+Route::resource('user-roles', UserRoleController::class)->except(['create', 'edit']);
+
 use App\Http\Controllers\TableController;
 Route::resource('table', TableController::class);
 
