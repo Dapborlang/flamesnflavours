@@ -42,7 +42,7 @@
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li><a class="dropdown-item" href="#" @click.prevent="Logout()">Sign out</a></li>
               </ul>
             </div>
           </div>
@@ -75,6 +75,17 @@
       toggleSection(section) {
         this.activeSection = section;
       },
+      Logout()
+      {
+        axios
+        .post('/logout')
+        .then((response) => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error('Form submission error:', error);
+        });
+      }
     },
     components: {
       HomeComponent,

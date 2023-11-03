@@ -24,9 +24,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->role->role->role==="Admin")
+        if(isset(auth()->user()->role->role->role) && auth()->user()->role->role->role==="Admin")
         {
-            return view('dashboard.index');
+            return view('dashboard.admin');
+        }
+
+        if(isset(auth()->user()->role->role->role) && auth()->user()->role->role->role==="Kitchen")
+        {
+            return view('dashboard.kitchen');
+        }
+
+        if(isset(auth()->user()->role->role->role) && auth()->user()->role->role->role==="Receptionist")
+        {
+            return view('dashboard.receptionist');
+        }
+
+        if(isset(auth()->user()->role->role->role) && auth()->user()->role->role->role==="Menu")
+        {
+            return view('dashboard.menu');
         }
 
         return view('home');
