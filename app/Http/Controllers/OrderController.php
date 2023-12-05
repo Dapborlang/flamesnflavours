@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
-
+ 
 class OrderController extends Controller
 {
     public function __construct()
@@ -13,6 +13,12 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
     
+    public function index()
+    {
+        $orders = Order::with('items')->get(); 
+        return response()->json($orders);
+    }
+
     public function create()
     {
         return view('order.create');
@@ -24,7 +30,6 @@ class OrderController extends Controller
         $order = new Order();
         $order->table_id = 1; 
         $order->status = 'pending'; 
-        $order->total_amount=1000;
         $order->save();
 
         foreach ($request->items as $item) {
@@ -35,11 +40,13 @@ class OrderController extends Controller
             $orderItem->amount=$item['rate'];
             $orderItem->save();
         }
+
+
     
         return response()->json(['message' => 'Order placed successfully', 'order' => $order]);
     }
 
-    public function showOrderSummary(Order $order)
+    public function show(Order $order)
     {
         $order->load('items.menuItem'); 
         return view('order.summary', compact('order'));

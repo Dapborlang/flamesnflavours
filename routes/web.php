@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 
 Auth::routes();
@@ -41,7 +41,6 @@ Route::resource('menu-items', MenuItemController::class);
 
 use App\Http\Controllers\OrderController;
 Route::resource('order',OrderController::class);
-Route::get('/order/{order}', [OrderController::class, 'showOrderSummary'])->name('order.summary');
 Route::get('/orders/detail', [OrderController::class, 'showPendingOrders']);
 Route::get('/orders/{order}', [OrderController::class, 'getOrdersDetail']);
 Route::post('/orders', [OrderController::class, 'getOrdersByStatus']);
