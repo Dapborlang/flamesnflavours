@@ -2,22 +2,18 @@
   <div class="row">
     <div class="col-sm-8">
       <h2 class="menu-header">Menu</h2>
-
-      <!-- Display categories with expanders -->
-      <div v-for="category in categories" :key="category.id" class="category">
+      <div v-for="category in categories" :key="category.id" class="category" :class="{ 'category-expanded': isCategoryExpanded(category.id) }">
         <div @click="toggleCategory(category.id)" class="category-header">
           <h3>{{ category.name }}</h3>
           <span v-if="isCategoryExpanded(category.id)">▼</span>
           <span v-else>▶</span>
         </div>
-
-        <!-- Display menu items for the current category if expanded -->
         <div v-if="isCategoryExpanded(category.id)" class="menu-items">
           <ul>
             <li v-for="menuItem in getMenuItems(category.id)" :key="menuItem.id" class="menu-item">
-              {{ menuItem.name }} - ₹{{ menuItem.price }}
-              <input class="form-control" v-model.number="menuItem.quantity" type="number" min="1" placeholder="Quantity">
-              <button class="btn btn-primary btn-sm" @click="addToCart(menuItem)">Add to Cart</button>
+                {{ menuItem.name }} - ₹{{ menuItem.price }}
+                <input class="form-control" v-model.number="menuItem.quantity" type="number" min="1" placeholder="Quantity">
+                <button class="btn btn-primary btn-sm" @click="addToCart(menuItem)">Add to Cart</button>
             </li>
           </ul>
         </div>
@@ -39,8 +35,7 @@
           <button @click="placeOrder" class="place-order-btn">Place Order</button>
         </div>
       </div>
-    </div>
-    
+    </div>    
   </div>
 </template>
   
@@ -164,15 +159,17 @@
   </script>
   
   <style scoped>
-
 .menu-header {
-  font-size: 24px;
+  font-size: 30px;
   margin-bottom: 15px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
 }
 
 .category {
   margin-bottom: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #30302f;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -184,11 +181,25 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: #f5f5f5;
+  background-color: #776733;
+  color: #fff;
+  transition: background-color 0.3s; /* Add transition for smooth color change */
 }
 
 .category-header:hover {
-  background-color: #e0e0e0;
+  background-color: #604618;
+}
+
+.card-header {
+  background-color: #776733;
+  color: #fff;
+}
+
+.card-body {
+  background-color: rgba(73, 58, 7, 0.4);
+}
+.category-expanded {
+  background-color: rgba(73, 58, 7, 0.4);
 }
 
 .menu-items {
@@ -200,18 +211,14 @@
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .menu-item input {
   margin-right: 10px;
   padding: 5px;
   width: 60px;
-}
-
-.cart-header {
-  font-size: 24px;
-  margin-top: 30px;
-  margin-bottom: 15px;
 }
 
 .cart-items {

@@ -1,0 +1,4 @@
+Database:	osin_fnf
+Host:	localhost
+Username:	osin_fnf
+Password:	BEWbKpvYU5SMLPRQYBJZ

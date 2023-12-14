@@ -12,7 +12,14 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <style>
+        body {
+            background-image: url('/images/background.png');
+            background-size: cover; /* Adjust as needed */
+            background-position: center center; /* Adjust as needed */
+            background-repeat: repeat; /* Repeat both horizontally and vertically */
+        }
+    </style>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>

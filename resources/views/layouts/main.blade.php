@@ -7,10 +7,13 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
         body {
+            background-image: url('/images/background.png');
+            background-repeat: repeat; /* Repeat both horizontally and vertically */
+        
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            /* background-color: #f5f5f5; */
         }
 
         header {
