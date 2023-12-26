@@ -34,9 +34,9 @@ class HomeController extends Controller
             return view('dashboard.kitchen');
         }
 
-        if(isset(auth()->user()->role->role->role) && auth()->user()->role->role->role==="Receptionist")
+        if(isset(auth()->user()->role->role->role) && auth()->user()->role->role->role==="Reception")
         {
-            return view('dashboard.receptionist');
+            return view('dashboard.reception');
         }
 
         if(isset(auth()->user()->role->role->role) && auth()->user()->role->role->role==="Menu")

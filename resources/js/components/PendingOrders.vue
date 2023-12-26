@@ -15,64 +15,45 @@
     <div v-if="currentStatus === 'Pending'" class="card">
       <div class="card-body">
         <h2>Pending Orders</h2>
-        <ul class="order-list">
-          <li v-for="order in pendingOrders" :key="order.id" class="order-item">
-            <!-- Display pending order details -->
-            <button @click="handleButtonClick(order.id)" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#order_summary_id">
-              {{ order.id }} - {{ capitalizeFirstLetter(order.status) }}
-            </button>          
-            <button @click="processOrder(order.id)" class="action-btn">Process</button>
-          </li>
-        </ul>
+        <table class="order-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Items</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="order in pendingOrders" :key="order.id">
+          <td>{{ order.id }}</td>
+          <td>
+            <ul>
+              <li v-for="item in order.items" :key="item.id">
+                {{ item.menu_item.name }} - {{ item.quantity }} x ₹{{ item.amount }}
+              </li>
+            </ul>
+          </td>
+          <td>{{ order.status }}</td>
+        </tr>
+      </tbody>
+    </table>
       </div>
     </div>
 
     <div v-else-if="currentStatus === 'Processing'" class="card">
       <div class="card-body">
         <h2>Processing Orders</h2>
-        <ul class="order-list">
-          <li v-for="order in processingOrders" :key="order.id" class="order-item">
-            <!-- Display processing order details -->
-            <button @click="handleButtonClick(order.id)" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#order_summary_id">
-              {{ order.id }} - {{ capitalizeFirstLetter(order.status) }}
-            </button>
-            <button @click="completeOrder(order.id)" class="action-btn">Complete</button>
-          </li>
-        </ul>
+        
       </div>
     </div>
 
     <div v-else-if="currentStatus === 'Completed'" class="card">
       <div class="card-body">
         <h2>Completed Orders</h2>
-        <ul class="order-list">
-          <li v-for="order in completedOrders" :key="order.id" class="order-item">
-            <button @click="handleButtonClick(order.id)" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#order_summary_id">
-              {{ order.id }} - {{ capitalizeFirstLetter(order.status) }}
-            </button>
-            <button @click="printReceipt(order.id)" class="action-btn">Print</button>
-          </li>
-        </ul>
+        
       </div>
     </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="order_summary_id" tabindex="-1" aria-labelledby="order_summary" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="order_summary">Order Summary</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <order-summary :order="order"></order-summary>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </template>
 
@@ -84,30 +65,7 @@ export default {
       currentStatus: 'Pending',
       pendingOrders: [],
       processingOrders: [],
-      completedOrders: [],
-      order: 
-      {
-        "id": 5,
-        "table_id": 1,
-        "total_amount": "1000.00",
-        "status": "completed",
-        "items": 
-        [
-          {
-            "id": 6,
-            "order_id": 5,
-            "menu_item_id": 1,
-            "quantity": 1,
-            "menu_item": {
-            "id": 1,
-            "name": "Tomato Soup",
-            "description": "..",
-            "price": "90.00",
-            "category_id": 1,
-            }
-          },
-        ] 
-      }
+      completedOrders: [],      
     };
   },
   mounted() {
@@ -120,7 +78,7 @@ export default {
     fetchOrders() {
       axios.post('/orders', { status: 'Pending' })
         .then(response => {
-          this.pendingOrders = response.data;
+          this.pendingOrders = response.data;         
         })
         .catch(error => {
           console.error('Error fetching pending orders:', error);
@@ -218,38 +176,24 @@ h2 {
   color: #333;
 }
 
-.order-list {
-  list-style: none;
-  padding: 0;
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.order-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #f9f9f9;
+.order-table th, .order-table td {
   border: 1px solid #ddd;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.02);
-  }
+  padding: 10px;
+  text-align: left;
 }
 
-.action-btn {
-  background-color: #28a745;
-  color: #fff;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+.order-table th {
+  background-color: #f0f0f0;
+}
 
-  &:hover {
-    background-color: #218838;
-  }
+.order-table tbody tr:hover {
+  background-color: #f9f9f9;
 }
 </style>

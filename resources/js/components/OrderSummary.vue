@@ -41,8 +41,6 @@ export default {
 </script>
 
 <style scoped>
-/* Add your component styles here */
-
 .order-summary-container {
     max-width: 600px;
     margin: auto;
@@ -50,6 +48,9 @@ export default {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    /* Updated background property for opacity and white color */
+    background: rgba(255, 255, 255, 0.8);
 }
 
 h2 {

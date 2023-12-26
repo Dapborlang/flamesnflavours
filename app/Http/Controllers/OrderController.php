@@ -65,6 +65,7 @@ class OrderController extends Controller
 
         $status = $request->input('status');
         $orders = Order::where('status', $status)->get();
+        $orders->load('items.menuItem');
         return response()->json($orders);
     }
 
