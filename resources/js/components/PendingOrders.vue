@@ -20,7 +20,7 @@
         <tr>
           <th>Order ID</th>
           <th>Items</th>
-          <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +33,7 @@
               </li>
             </ul>
           </td>
-          <td>{{ order.status }}</td>
+          <td><button @click="processOrder(order.id)" class="action-btn">Process</button></td>
         </tr>
       </tbody>
     </table>
@@ -43,14 +43,56 @@
     <div v-else-if="currentStatus === 'Processing'" class="card">
       <div class="card-body">
         <h2>Processing Orders</h2>
-        
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Items</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="order in processingOrders" :key="order.id">
+              <td>{{ order.id }}</td>
+              <td>
+                <ul>
+                  <li v-for="item in order.items" :key="item.id">
+                    {{ item.menu_item.name }} - {{ item.quantity }} x ₹{{ item.amount }}
+                  </li>
+                </ul>
+              </td>
+              <td><button @click="printOrder(order.id)" class="action-btn">Print</button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
     <div v-else-if="currentStatus === 'Completed'" class="card">
       <div class="card-body">
         <h2>Completed Orders</h2>
-        
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Items</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="order in completedOrders" :key="order.id">
+              <td>{{ order.id }}</td>
+              <td>
+                <ul>
+                  <li v-for="item in order.items" :key="item.id">
+                    {{ item.menu_item.name }} - {{ item.quantity }} x ₹{{ item.amount }}
+                  </li>
+                </ul>
+              </td>
+              <td><button @click="printOrder(order.id)" class="action-btn">Print</button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     
@@ -70,6 +112,7 @@ export default {
   },
   mounted() {
     this.fetchOrders();
+    setInterval(this.fetchOrders, 6000);
   },
   methods: {
     capitalizeFirstLetter(str) {
@@ -108,10 +151,15 @@ export default {
         .then(response => {
           console.log('Order processed successfully:', response.data);
           this.fetchOrders(); 
+          window.open(`/print/${orderId}`, '_blank');
         })
         .catch(error => {
           console.error('Error processing order:', error);
         });
+    },
+    printOrder(orderId)
+    {
+      window.open(`/print/${orderId}`, '_blank');
     },
     completeOrder(orderId) {
       axios.post(`/orders/complete/${orderId}`)

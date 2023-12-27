@@ -64,7 +64,9 @@ class OrderController extends Controller
         ]);
 
         $status = $request->input('status');
-        $orders = Order::where('status', $status)->get();
+        $orders = Order::where('status', $status)
+        ->orderBy('id','desc')
+        ->get();
         $orders->load('items.menuItem');
         return response()->json($orders);
     }
@@ -93,9 +95,10 @@ class OrderController extends Controller
         return $order;
     }
 
-    public function printReceipt(Order $order)
+    public function printReceipt($id)
     {
-        $order->load('items.menuItem'); 
-        return view('order.print', compact('order'));
+        $order=OrderItem::where('order_id',$id)
+        ->get();
+        return view('order.print', compact('order','id'));
     }
 }
