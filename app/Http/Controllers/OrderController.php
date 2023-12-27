@@ -57,17 +57,16 @@ class OrderController extends Controller
         return view('order.pending');
     }
 
-    public function getOrdersByStatus(Request $request)
+    public function getOrdersByStatus()
     {
-        $request->validate([
-            'status' => 'required|in:Pending,Processing,Completed',
-        ]);
-
-        $status = $request->input('status');
-        $orders = Order::where('status', $status)
-        ->orderBy('id','desc')
+        $orders = Order::orderBy('id','desc')
         ->get();
         $orders->load('items.menuItem');
+        foreach($orders as $items)
+        {
+            $data[$items->status][]=$items;
+        }
+        return $data;
         return response()->json($orders);
     }
 

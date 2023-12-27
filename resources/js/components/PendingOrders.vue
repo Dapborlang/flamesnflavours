@@ -1,6 +1,5 @@
 <template>
-  <div class="order-status-container">
-    
+  <div class="order-status-container">    
     <div class="tabs">
       <div
         v-for="(status, index) in orderStatuses"
@@ -119,28 +118,14 @@ export default {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
     fetchOrders() {
-      axios.post('/orders', { status: 'Pending' })
+      axios.post('/orders')
         .then(response => {
-          this.pendingOrders = response.data;         
+          this.pendingOrders = response.data.pending;  
+          this.processingOrders = response.data.processing; 
+          this.completedOrders = response.data.completed;      
         })
         .catch(error => {
           console.error('Error fetching pending orders:', error);
-        });
-
-      axios.post('/orders', { status: 'Processing' })
-        .then(response => {
-          this.processingOrders = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching processing orders:', error);
-        });
-
-      axios.post('/orders', { status: 'Completed' })
-        .then(response => {
-          this.completedOrders = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching completed orders:', error);
         });
     },
     changeStatus(status) {
