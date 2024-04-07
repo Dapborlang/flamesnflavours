@@ -28,6 +28,15 @@
                     <a href="#" class="nav-link px-0 align-middle" @click="toggleSection('userRole')">
                     <i class="bi bi-menu-app"></i><span class="ms-1 d-none d-sm-inline">User Management</span></a>
                 </li>
+                <li>
+                    <a href="#" class="nav-link px-0 align-middle" @click="toggleSection('stockItem')">
+                    <i class="bi bi-menu-app"></i><span class="ms-1 d-none d-sm-inline">Stock Item</span></a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link px-0 align-middle" @click="toggleSection('stock')">
+                    <i class="bi bi-menu-app"></i><span class="ms-1 d-none d-sm-inline">Stock</span></a>
+                </li>
+                
             </ul>
             <hr>
             <div class="dropdown pb-4">
@@ -53,6 +62,8 @@
           <menu-management-component v-if="activeSection === 'menuManagement'"></menu-management-component>
           <role-component v-if="activeSection === 'role'"></role-component>
           <user-role-component v-if="activeSection === 'userRole'"></user-role-component>
+          <stock-item-component v-if="activeSection === 'stockItem'"></stock-item-component>
+          <stock-component v-if="activeSection === 'stock'"></stock-component>
         </div>
       </div>
     </div>
@@ -64,6 +75,8 @@
   import MenuManagementComponent  from './MenuManagement.vue'; 
   import RoleComponent  from './RoleComponent.vue'; 
   import UserRoleComponent  from './UserRoleComponent.vue'; 
+  import StockItemComponent  from './StockItemComponent.vue';
+  import StockComponent  from './StockComponent.vue';
 
   export default {
     data() {
@@ -93,6 +106,8 @@
       MenuManagementComponent,
       RoleComponent,
       UserRoleComponent,
+      StockItemComponent,
+      StockComponent,
     },
   };
 </script>

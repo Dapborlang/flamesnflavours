@@ -51,3 +51,17 @@ Route::get('/print/{id}', [OrderController::class, 'printReceipt']);
 use App\Http\Controllers\DashBoardController;
 Route::get('/dashboard', [DashBoardController::class, 'index']);
 Route::get('/dailysale', [DashBoardController::class, 'dailySale']);
+
+use App\Http\Controllers\StockCategoryController;
+Route::get('/stock_categories', [StockCategoryController::class, 'index']);
+Route::post('/stock_categories', [StockCategoryController::class, 'store']);
+Route::put('/stock_categories/{stockCategory}', [StockCategoryController::class, 'update']);
+Route::delete('/stock_categories/{stockCategory}', [StockCategoryController::class, 'destroy']);
+
+use App\Http\Controllers\StockController;
+
+Route::get('/stocks', [StockController::class, 'index']);
+Route::post('/stocks', [StockController::class, 'store']);
+Route::put('/stocks/{stock}', [StockController::class, 'update']);
+Route::delete('/stocks/{stock}', [StockController::class, 'destroy']);
+Route::get('/stock-register', [StockController::class,'registerView']);
