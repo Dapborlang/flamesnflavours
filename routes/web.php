@@ -49,7 +49,6 @@ Route::post('/orders/complete/{id}', [OrderController::class, 'completeOrder']);
 Route::get('/print/{id}', [OrderController::class, 'printReceipt']);
 
 use App\Http\Controllers\DashBoardController;
-Route::get('/dashboard', [DashBoardController::class, 'index']);
 Route::get('/dailysale', [DashBoardController::class, 'dailySale']);
 
 use App\Http\Controllers\StockCategoryController;
