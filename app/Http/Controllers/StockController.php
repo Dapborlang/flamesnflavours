@@ -63,6 +63,7 @@ class StockController extends Controller
             'quantity' => 'required|numeric',
             'date' => 'required|date',
             'remark' => 'required',
+            'balance' => 'required',
         ]);
 
         $stock->update([
@@ -71,6 +72,7 @@ class StockController extends Controller
             'quantity' => $request->quantity,
             'date' => $request->date,
             'remark'=>$request->remark,
+            'balance'=>$request->balance,
         ]);
 
         return response()->json($stock, 200);

@@ -24,6 +24,10 @@
               <input v-model="quantity" type="number" id="quantity" step="0.01" required>
             </div>
             <div class="form-group">
+              <label for="balance">Balance:</label>
+              <input v-model="balance" type="number" id="balance" :readonly="isBalanceReadOnly">
+            </div>
+            <div class="form-group">
               <label for="date">Date:</label>
               <input v-model="date" type="date" id="date" required>
             </div>
@@ -94,6 +98,8 @@
         editingStock: null,
         currentPage: 1,
         totalPages: 1,
+        isBalanceReadOnly: true,
+        balance:null
       };
     },
     mounted() {
@@ -148,6 +154,8 @@
         this.quantity = stock.quantity;
         this.date = stock.date;
         this.remark = stock.remark;
+        this.balance=stock.balance;
+        this.isBalanceReadOnly = false;
       },
       updateStock() {
         axios.put(`/stocks/${this.editingStock.id}`, {
@@ -156,6 +164,7 @@
           quantity: this.quantity,
           date: this.date,
           remark: this.remark,
+          balance:this.balance,
         })
         .then(response => {
           this.fetchStocks();
@@ -186,6 +195,8 @@
         this.quantity = 0;
         this.date = '';
         this.remark = '';
+        this.balance=null;
+        this.isBalanceReadOnly = true;
       },
     },
   };

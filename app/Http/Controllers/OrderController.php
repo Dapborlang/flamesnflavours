@@ -13,9 +13,12 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('items')->get(); 
+        $date = $request->input('date', now()->toDateString());
+        $orders = Order::with('items')
+        ->whereDate('created_at',$date)
+        ->get(); 
         return response()->json($orders);
     }
 
@@ -99,5 +102,5 @@ class OrderController extends Controller
         $order=OrderItem::where('order_id',$id)
         ->get();
         return view('order.print', compact('order','id'));
-    }
+    }    
 }

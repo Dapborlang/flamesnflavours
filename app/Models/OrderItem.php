@@ -17,4 +17,10 @@ class OrderItem extends Model
     {
         return $this->belongsTo(MenuItem::class); 
     }
+
+    public function getUpdatedAtAttribute()
+    {
+        return $this->menuItem->name;
+    }
+
 }
