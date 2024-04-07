@@ -18,7 +18,8 @@ return new class extends Migration
             $table->enum('transaction', ['credit', 'debit']);
             $table->decimal('quantity', 8, 2); 
             $table->decimal('balance', 8, 2);
-            $table->string('remark');                         
+            $table->string('remark');       
+            $table->foreign('stock_category_id')->references('id')->on('stock_categories')->onDelete('cascade');                  
             $table->timestamps();
         });
     }

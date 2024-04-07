@@ -63,6 +63,7 @@ class OrderController extends Controller
     public function getOrdersByStatus()
     {
         $orders = Order::orderBy('id','desc')
+        ->whereDate('created_at',now()->toDateString())
         ->get();
         $orders->load('items.menuItem');
         foreach($orders as $items)
@@ -70,7 +71,6 @@ class OrderController extends Controller
             $data[$items->status][]=$items;
         }
         return $data;
-        return response()->json($orders);
     }
 
     public function processOrder($orderId)
