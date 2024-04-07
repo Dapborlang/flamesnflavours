@@ -48,6 +48,7 @@
               <th>Quantity</th>
               <th>Balance</th>
               <th>Date</th>
+              <th>Remark</th>
             </tr>
             <tr v-for="stock in stocks" :key="stock.id">
               <td>{{ stock.category.name }}</td>
@@ -55,6 +56,7 @@
               <td>{{ stock.quantity }}</td>
               <td>{{ stock.balance }}</td>
               <td>{{ stock.date }}</td>
+              <td>{{ stock.remark }}</td>
             </tr>
           </table>
           </div>          

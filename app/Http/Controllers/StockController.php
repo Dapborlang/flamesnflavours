@@ -15,7 +15,9 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stocks = Stock::with('category')->paginate(10); 
+        $stocks = Stock::with('category')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10); 
         return response()->json($stocks);
     }
 
